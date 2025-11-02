@@ -7,7 +7,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   const apiKey = req.headers['x-api-key'] as string;
 
   if (!apiKey) {
-    logger.warn(JSON.stringify({ requestId: req.id }), 'Missing API key');
+    logger.warn('Missing API key', { requestId: req.id });
     return res.status(401).json({ error: 'API key is required' });
   }
 
