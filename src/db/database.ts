@@ -38,7 +38,7 @@ export interface Summary {
 class DatabaseService {
   private db: Database.Database;
 
-  constructor(dbPath: string = path.join(process.cwd(), 'data', 'app.db')) {
+  constructor(dbPath: string) {
     this.db = new Database(dbPath);
     this.initialize();
   }
