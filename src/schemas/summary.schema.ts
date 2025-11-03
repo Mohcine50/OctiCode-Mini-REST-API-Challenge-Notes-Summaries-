@@ -8,6 +8,15 @@ export const createSummarySchema = z.object({
   confidence: z.number().min(0).max(1).optional(),
 });
 
+export const SummarySchema = z.object({
+  id: z.string(),
+  voiceNoteId: z.string(),
+  content: z.string(),
+  keyPoints: z.array(z.string()).optional(),
+  createdAt: z.string().datetime().optional(),
+  updatedAt: z.string().datetime().optional(),
+});
+
 export const updateSummarySchema = createSummarySchema.partial().omit({ voiceNoteId: true });
 
 export type CreateSummaryInput = z.infer<typeof createSummarySchema>;

@@ -13,6 +13,8 @@ import healthRoutes from './routes/health.routes';
 import { logger } from './utils/logger';
 import fs from 'fs';
 import path from 'path';
+import swaggerUi from 'swagger-ui-express';
+import openApiDocument from './config/openapi';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -42,6 +44,14 @@ const apiKeyLimiter = rateLimit({
   message: { error: 'Too many requests, please try again later.' },
   standardHeaders: true,
   legacyHeaders: false,
+});
+
+// Swagger UI setup
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocument));
+
+// Serve OpenAPI JSON
+app.get('/api-docs.json', (req, res) => {
+  res.json(openApiDocument);
 });
 
 app.use('/api', apiKeyLimiter);

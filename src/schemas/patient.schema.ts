@@ -11,6 +11,17 @@ export const createPatientSchema = z.object({
   phone: z.string().min(10).max(20).optional(),
 });
 
+export const PatientSchema = z.object({
+  id: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  dateOfBirth: z.string(),
+  email: z.string().email().optional(),
+  phone: z.string().optional(),
+  createdAt: z.string().datetime().optional(),
+  updatedAt: z.string().datetime().optional(),
+});
+
 export const updatePatientSchema = createPatientSchema.partial();
 
 export type CreatePatientInput = z.infer<typeof createPatientSchema>;

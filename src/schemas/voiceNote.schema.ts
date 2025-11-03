@@ -14,6 +14,17 @@ export const createVoiceNoteSchema = z.object({
     .optional(),
 });
 
+export const VoiceNoteSchema = z.object({
+  id: z.string(),
+  patientId: z.string(),
+  audioUrl: z.string().optional(),
+  transcription: z.string().optional(),
+  duration: z.number().optional(),
+  metadata: z.record(z.any()).optional(),
+  createdAt: z.string().datetime().optional(),
+  updatedAt: z.string().datetime().optional(),
+});
+
 export const updateVoiceNoteSchema = createVoiceNoteSchema.partial().omit({ patientId: true });
 
 export type CreateVoiceNoteInput = z.infer<typeof createVoiceNoteSchema>;
